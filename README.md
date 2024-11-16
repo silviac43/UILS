@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # uils
 
 Aplicación de transporte estudiantil de la UIS utilizando Flutter.
@@ -14,3 +15,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# UILS
+Aplicación de transporte movil para la comunidad UIS.
+>>>>>>> 3ad5ef1759523e1f1f2b8cdc32a8c343fb4cc644
