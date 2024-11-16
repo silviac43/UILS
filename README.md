@@ -1,21 +1,26 @@
-<<<<<<< HEAD
-# uils
+# UILS - Aplicación de Transporte Móvil para Estudiantes de la UIS
 
-Aplicación de transporte estudiantil de la UIS utilizando Flutter.
+UILS es una aplicación móvil diseñada para facilitar el transporte de los estudiantes de la Universidad Industrial de Santander (UIS). Permite a los estudiantes reservar un transporte de manera eficiente y tener información en tiempo real sobre el servicio.
 
-## Getting Started
+## Características
 
-This project is a starting point for a Flutter application.
+- **Reservas de transporte**: Los estudiantes pueden reservar un transporte con su deseada anticipación.
+- **Notificaciones en tiempo real**: Recibe actualizaciones sobre el estado del transporte y la disponibilidad de asientos.
+- **Rutas organizadas**: Los conductores pueden planificar la mejor ruta para optimizar el tiempo y los recursos.
+- **Interfaz amigable**: Diseño intuitivo para facilitar la navegación y la gestión de reservas.
 
-A few resources to get you started if this is your first Flutter project:
+## Logo
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![Logo UIS](assets/images/logo.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# UILS
-Aplicación de transporte movil para la comunidad UIS.
->>>>>>> 3ad5ef1759523e1f1f2b8cdc32a8c343fb4cc644
+## Instalación
+
+1. Clona este repositorio en tu máquina local:
+
+   ```bash
+   git clone https://github.com/silviac43/UILS.git
+
+Realizado por:
+
+- Jorge Daniel Robles Ardila - 2210065
+- Silvia Alejandra Cárdenas Santos - 2210102
