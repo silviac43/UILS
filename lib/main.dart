@@ -5,7 +5,9 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
   @override
+
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -82,7 +84,7 @@ class InitialScreen extends StatelessWidget {
               children: [
                 Image.asset(
                   'assets/images/bus.png',
-                  width: 100,
+                  width: 200,
                   height: 50,
                 ),
                 SizedBox(height: 10),
