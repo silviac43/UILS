@@ -20,7 +20,7 @@ class InitialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -28,66 +28,68 @@ class InitialScreen extends StatelessWidget {
             padding: const EdgeInsets.only(top: 40.0),
             child: Column(
               children: [
+
+                SizedBox(height: 15),
+
                 // Logo UIS
                 Image.asset(
                   'assets/images/logo.png',
                   width: 100,
                   height: 100,
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 2),
                 Text(
                   'UILS',
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: 36,
                     fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                    color: Color.fromRGBO(6, 135, 4, 1),
                   ),
                 ),
                 Text(
                   '¡On the road!',
                   style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey,
+                    fontSize: 18,
+                    color: Color.fromRGBO(94, 174, 92, 1),
                   ),
                 ),
               ],
             ),
           ),
+
+          SizedBox(height: 60),
+
           // Clima y temperatura
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 Icons.cloud,
-                color: Colors.grey,
+                color: Color.fromRGBO(184, 184, 184, 1),
                 size: 40,
               ),
-              SizedBox(width: 10),
+              SizedBox(width: 12),
               Text(
                 '29 °C',
                 style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Color.fromRGBO(113, 113, 113, 1),
                 ),
               ),
             ],
           ),
           // Información del Bus UIS
+          SizedBox(height: 70),
+
           Container(
             margin: EdgeInsets.symmetric(horizontal: 20),
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.green.shade50,
+              color: Color.fromRGBO(197, 240, 214, 1),
               borderRadius: BorderRadius.circular(15),
             ),
             child: Column(
               children: [
-                Image.asset(
-                  'assets/images/bus.png',
-                  width: 200,
-                  height: 50,
-                ),
-                SizedBox(height: 10),
                 Text(
                   'Bus UIS',
                   style: TextStyle(
@@ -96,12 +98,37 @@ class InitialScreen extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
+                SizedBox(height: 5),
+                Image.asset(
+                  'assets/images/bus.png',
+                  width: 200,
+                  height: 50,
+                ),
+                SizedBox(height: 10),
+                
                 Text(
-                  'Lunes a Viernes\nPasa cada 30 minutos\n6:00 a.m. - 8:00 p.m.',
+                  'Lunes a Viernes',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,
-                    color: Colors.black54,
+                    color: Color.fromRGBO(59, 59, 59, 1),
+                  ),
+                ),
+                Text(
+                  'Pasa cada 30 minutos',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(59, 59, 59, 1),
+                  ),
+                ),
+                Text(
+                  '8:00 a.m. - 8:00 p.m.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Color.fromRGBO(59, 59, 59, 1),
                   ),
                 ),
               ],
@@ -130,16 +157,17 @@ class InitialScreen extends StatelessWidget {
                 Positioned(
                   bottom: 50,
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 70, vertical: 12),
                     decoration: BoxDecoration(
-                      color: Colors.green,
+                      color: const Color.fromARGB(255, 26, 109, 51),
+                      border: Border.all(color: Colors.white, width: 1),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
                       'Colectivo',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -169,24 +197,25 @@ class _TutorialScreenState extends State<TutorialScreen> {
       "image": "assets/images/tuto1.png",
       "title": "Como pasajero..",
       "description":
-      "• Encontrarás las rutas ofrecidas por conductores.\n"
-          "• Puedes sugerir la creación de una ruta.\n"
-          "• Una vez reserves un cupo, recuerda confirmar antes del viaje.",
+      "• Encontrarás las rutas ofrecidas \n por conductores.\n"
+          "• Puedes sugerir la creación de \n una ruta.\n"
+          "• Una vez reserves un cupo, \n recuerda confirmar antes del \n viaje.",
     },
     {
       "image": "assets/images/tuto2.png",
       "title": "Como conductor..",
       "description":
-      "• Crea tu ruta con los puntos clave, precio y hora de salida.\n"
-          "• Recibe notificaciones de reservas y reasignaciones de cupos.\n"
-          "• Comunicación directa con chat grupal.",
+      "• Crea tu ruta con los puntos \n clave, precio y hora de salida.\n"
+          "• Recibe notificaciones de \n reservas y reasignaciones de \n cupos.\n"
+          "• Comunicación directa con chat \n grupal.",
     },
     {
       "image": "assets/images/tuto3.png",
-      "title": "Tu opinión es importante",
+      "title": "Tu opinión es \nimportante",
       "description":
-      "Califica a tu conductor o pasajeros al finalizar las rutas.\n"
-          "De este modo te ayudamos a escoger el servicio más adecuado para ti.",
+          "Califica a tu conductor o \n pasajeros al finalizar las \n rutas.\n"
+          " \n"
+          "De este modo te ayudamos a \n escoger el servicio más \n adecuado para ti.",
     },
   ];
 
@@ -211,6 +240,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SafeArea(
         child: Column(
           children: [
@@ -221,6 +251,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                 child: Text(
                   "SALTAR",
                   style: TextStyle(
+                    fontSize: 17,
                     color: Colors.green,
                     fontWeight: FontWeight.bold,
                   ),
@@ -242,26 +273,26 @@ class _TutorialScreenState extends State<TutorialScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        SizedBox(height: 30),
                         Image.asset(
                           tutorialData[index]["image"]!,
-                          height: 250,
+                          height: 240,
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 30),
                         Text(
                           tutorialData[index]["title"]!,
                           style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green,
+                            fontSize: 30,
+                            color: const Color.fromARGB(255, 76, 175, 122),
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: 50),
                         Text(
                           tutorialData[index]["description"]!,
                           style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black54,
+                            fontSize: 20,
+                            color: const Color.fromARGB(137, 0, 0, 0),
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -284,8 +315,9 @@ class _TutorialScreenState extends State<TutorialScreen> {
                     )
                         : null,
                     child: Text(
-                      "ATRÁS",
+                      "ATRÁS      ",
                       style: TextStyle(
+                        fontSize: 17,
                         color:
                         _currentPage > 0 ? Colors.green : Colors.grey[400],
                         fontWeight: FontWeight.bold,
@@ -315,6 +347,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                           ? "SIGUIENTE"
                           : "COMENZAR",
                       style: TextStyle(
+                        fontSize: 17,
                         color: Colors.green,
                         fontWeight: FontWeight.bold,
                       ),
@@ -323,6 +356,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                 ],
               ),
             ),
+            SizedBox(height: 30),
           ],
         ),
       ),
@@ -354,14 +388,13 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 60),
               Center(
                 child: Text(
                   "Iniciar sesión",
                   style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                    fontSize: 40,
+                    color: const Color.fromARGB(255, 68, 156, 100),
                   ),
                 ),
               ),
@@ -370,7 +403,12 @@ class LoginScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("¿Primera vez? "),
+                    Text(
+                        "¿Primera vez? ",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                    ),
                     TextButton(
                       onPressed: () {
                         // Navegar a la página de registro
@@ -380,6 +418,7 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.bold,
+                          fontSize: 20,
                         ),
                       ),
                     ),
@@ -396,6 +435,24 @@ class LoginScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
+
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton(
+                          onPressed: () {
+                            // Navegar a la página de "Olvidé mi contraseña"
+                          },
+                          child: Text(
+                            "Ingrese sus datos",
+                            style: TextStyle(
+                              color: const Color.fromARGB(255, 0, 0, 0),
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(height: 10),
                       TextField(
                         decoration: InputDecoration(
                           labelText: "Email",
@@ -405,7 +462,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 16),
+                      SizedBox(height: 40),
                       TextField(
                         obscureText: true,
                         decoration: InputDecoration(
@@ -416,16 +473,19 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 8),
+                      SizedBox(height: 20),
                       Align(
-                        alignment: Alignment.centerRight,
+                        alignment: Alignment.center,
                         child: TextButton(
                           onPressed: () {
                             // Navegar a la página de "Olvidé mi contraseña"
                           },
                           child: Text(
                             "Olvidé mi contraseña",
-                            style: TextStyle(color: Colors.green),
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 18,
+                              ),
                           ),
                         ),
                       ),
@@ -433,7 +493,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 60),
               Center(
                 child: ElevatedButton(
                   onPressed: () {
@@ -444,15 +504,15 @@ class LoginScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 65, vertical: 16),
                   ),
                   child: Text(
                     "Ingresar",
-                    style: TextStyle(fontSize: 16, color: Colors.white),
+                    style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 50),
               Center(
                 child: IconButton(
                   onPressed: () {
@@ -472,4 +532,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
