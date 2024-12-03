@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'driver_screen.dart';
 import 'initial_screen.dart';
+import 'slots_screen.dart';
+import 'menu_popup.dart';
 
 class PassengerScreen extends StatefulWidget {
   const PassengerScreen({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class PassengerScreen extends StatefulWidget {
 }
 
 class _PassengerScreenState extends State<PassengerScreen> {
-  final List<Map<String, String>> routes = [
+  final List<Map<String, String>> fromUisRoutes = [
     {
       'conductor': 'Daniel',
       'ruta': 'UIS - Cra 27 - Girón',
@@ -27,10 +28,50 @@ class _PassengerScreenState extends State<PassengerScreen> {
     },
   ];
 
+  final List<Map<String, String>> toUisRoutes = [
+    {
+      'conductor': 'Ana',
+      'ruta': 'Cabecera - Cra 36 - UIS',
+      'precio': '3,200',
+      'hora': '7:30am',
+      'rating': '4.9',
+    },
+    {
+      'conductor': 'Carlos',
+      'ruta': 'Floridablanca - UIS',
+      'precio': '3,500',
+      'hora': '8:00am',
+      'rating': '5',
+    },
+  ];
+
+  List<Map<String, String>> displayedRoutes = [];
+  bool isFromUis = true;
+
+  @override
+  void initState() {
+    super.initState();
+    displayedRoutes = fromUisRoutes;
+  }
+
+  void _toggleRoutes(bool fromUis) {
+    setState(() {
+      isFromUis = fromUis;
+      displayedRoutes = fromUis ? fromUisRoutes : toUisRoutes;
+    });
+  }
+
   void _logout() {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => InitialScreen()),
+    );
+  }
+
+  void _navigateToSlotsScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SlotsScreen()),
     );
   }
 
@@ -43,32 +84,7 @@ class _PassengerScreenState extends State<PassengerScreen> {
           IconButton(
             icon: Icon(Icons.more_vert),
             onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  return ListView(
-                    children: <Widget>[
-                      ListTile(
-                        title: Text('Pasajero'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        title: Text('Conductor'),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => DriverScreen()),
-                          );
-                        },
-                      ),
-                      ListTile(
-                        title: Text('Cerrar sesión'),
-                        onTap: _logout,
-                      ),
-                    ],
-                  );
-                },
-              );
+              showMenuPopup(context);
             },
           ),
         ],
@@ -82,8 +98,9 @@ class _PassengerScreenState extends State<PassengerScreen> {
               child: Text(
                 'Rutas disponibles',
                 style: TextStyle(
-                  fontSize: 32,
+                  fontSize: 36,
                   fontWeight: FontWeight.bold,
+                  color: Colors.green,
                 ),
               ),
             ),
@@ -92,12 +109,13 @@ class _PassengerScreenState extends State<PassengerScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () => _toggleRoutes(false),
                   icon: Icon(Icons.map, size: 30),
                   label: Text('Hacia la UIS'),
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                    backgroundColor: Colors.green,
+                    backgroundColor: isFromUis ? Colors.green : Colors.green.shade300,
+                    foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -105,12 +123,13 @@ class _PassengerScreenState extends State<PassengerScreen> {
                 ),
                 SizedBox(width: 20),
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () => _toggleRoutes(true),
                   icon: Icon(Icons.map, size: 30),
                   label: Text('Desde la UIS'),
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                    backgroundColor: Colors.green.shade300,
+                    backgroundColor: isFromUis ? Colors.green.shade300 : Colors.green,
+                    foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -121,26 +140,26 @@ class _PassengerScreenState extends State<PassengerScreen> {
             SizedBox(height: 20),
             ListView.builder(
               shrinkWrap: true,
-              itemCount: routes.length,
+              itemCount: displayedRoutes.length,
               itemBuilder: (context, index) {
                 return Card(
-                  margin: EdgeInsets.symmetric(vertical: 8.0),
+                  margin: EdgeInsets.symmetric(vertical: 16.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Row(
                       children: [
                         CircleAvatar(
-                          radius: 20,
+                          radius: 30,
                           backgroundColor: Colors.green,
                           child: Icon(
                             Icons.person,
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(width: 10),
+                        SizedBox(width: 20),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,36 +168,31 @@ class _PassengerScreenState extends State<PassengerScreen> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Conductor: ${routes[index]['conductor']} ${routes[index]['rating']}★',
-                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                    'Conductor: ${displayedRoutes[index]['conductor']} ${displayedRoutes[index]['rating']}★',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 5),
+                              SizedBox(height: 8),
                               Text(
-                                'Ruta: ${routes[index]['ruta']}',
-                                style: TextStyle(fontSize: 16),
+                                'Ruta: ${displayedRoutes[index]['ruta']}',
+                                style: TextStyle(fontSize: 18),
                               ),
-                              SizedBox(height: 5),
+                              SizedBox(height: 8),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
+                                  Text('\$${displayedRoutes[index]['precio']}', style: TextStyle(fontSize: 18)),
                                   Row(
                                     children: [
-                                      SizedBox(width: 3),
+                                      Icon(Icons.access_time, size: 24),
+                                      SizedBox(width: 5),
                                       Text(
-                                        '${routes[index]['precio']}',
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Icon(Icons.access_time, size: 20),
-                                      SizedBox(width: 3),
-                                      Text(
-                                        '${routes[index]['hora']}',
-                                        style: TextStyle(fontSize: 16),
+                                        '${displayedRoutes[index]['hora']}',
+                                        style: TextStyle(fontSize: 18),
                                       ),
                                     ],
                                   ),
@@ -193,7 +207,7 @@ class _PassengerScreenState extends State<PassengerScreen> {
                 );
               },
             ),
-            SizedBox(height: 160),
+            SizedBox(height: 60),
             Center(
               child: Column(
                 children: [
@@ -211,6 +225,7 @@ class _PassengerScreenState extends State<PassengerScreen> {
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(horizontal: 50, vertical: 12),
                       backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -224,7 +239,11 @@ class _PassengerScreenState extends State<PassengerScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
-        onTap: (int index) {},
+        onTap: (int index) {
+          if (index == 1) {
+            _navigateToSlotsScreen();
+          }
+        },
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.location_on, size: 40, color: Colors.green),

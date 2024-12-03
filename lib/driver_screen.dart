@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'passenger_screen.dart';
-import 'initial_screen.dart';
+import 'menu_popup.dart';
+import 'route_screen.dart';
 
 class DriverScreen extends StatefulWidget {
   const DriverScreen({Key? key}) : super(key: key);
@@ -29,6 +29,13 @@ class _DriverScreenState extends State<DriverScreen> {
     });
   }
 
+  void _navigateToRouteScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => RouteScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,39 +43,9 @@ class _DriverScreenState extends State<DriverScreen> {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            icon: const Icon(Icons.more_vert),
+            icon: Icon(Icons.more_vert),
             onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  return ListView(
-                    children: <Widget>[
-                      ListTile(
-                        title: const Text('Pasajero'),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => PassengerScreen()),
-                          );
-                        },
-                      ),
-                      ListTile(
-                        title: const Text('Conductor'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        title: const Text('Cerrar sesión'),
-                        onTap: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => InitialScreen()),
-                          );
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
+              showMenuPopup(context);
             },
           ),
         ],
@@ -84,6 +61,7 @@ class _DriverScreenState extends State<DriverScreen> {
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
+                  color: Colors.green,
                 ),
               ),
             ),
@@ -109,27 +87,49 @@ class _DriverScreenState extends State<DriverScreen> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
                         children: [
-                          Text(
-                            'Ruta: ${routes[index]['ruta']}',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          CircleAvatar(
+                            radius: 30,
+                            backgroundColor: Colors.green,
+                            child: Icon(
+                              Icons.person,
+                              color: Colors.white,
+                            ),
                           ),
-                          SizedBox(height: 5),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('${routes[index]['precio']} COP', style: TextStyle(fontSize: 16)),
-                              Row(
-                                children: [
-                                  Icon(Icons.access_time, size: 20),
-                                  SizedBox(width: 5),
-                                  Text('${routes[index]['hora']}', style: TextStyle(fontSize: 16)),
-                                ],
-                              ),
-                            ],
+                          SizedBox(width: 20),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  'Ruta: ${routes[index]['ruta']}',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                                SizedBox(height: 8),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('\$${routes[index]['precio']} COP', style: TextStyle(fontSize: 18)),
+                                    Row(
+                                      children: [
+                                        Icon(Icons.access_time, size: 24),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          '${routes[index]['hora']}',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -138,7 +138,7 @@ class _DriverScreenState extends State<DriverScreen> {
                 );
               },
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 60),
             Center(
               child: Text(
                 'Mantén presionada una ruta para eliminarla',
@@ -154,6 +154,7 @@ class _DriverScreenState extends State<DriverScreen> {
                     child: Text('Nueva ruta'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
                       padding: EdgeInsets.symmetric(horizontal: 50, vertical: 12),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -168,7 +169,11 @@ class _DriverScreenState extends State<DriverScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
-        onTap: (int index) {},
+        onTap: (int index) {
+          if (index == 1) {
+            _navigateToRouteScreen(context);
+          }
+        },
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.history, size: 40, color: Colors.green),
