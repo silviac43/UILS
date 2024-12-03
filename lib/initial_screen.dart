@@ -7,19 +7,17 @@ class InitialScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          // Logo y título
           Padding(
             padding: const EdgeInsets.only(top: 40.0),
             child: Column(
               children: [
-                SizedBox(height: 15),
                 Image.asset(
                   'assets/images/logo.png',
                   width: 100,
                   height: 100,
                 ),
-                SizedBox(height: 2),
                 Text(
                   'UILS',
                   style: TextStyle(
@@ -38,7 +36,13 @@ class InitialScreen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 60),
+
+          // Espacio flexible
+          Spacer(),
+
+
+          // Clima
+          SizedBox(height:30),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -57,7 +61,12 @@ class InitialScreen extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 70),
+
+          // Espacio flexible
+          Spacer(),
+
+          SizedBox(height:65),
+          // Información del bus
           Container(
             margin: EdgeInsets.symmetric(horizontal: 20),
             padding: EdgeInsets.all(16),
@@ -75,13 +84,11 @@ class InitialScreen extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(height: 5),
                 Image.asset(
                   'assets/images/bus.png',
                   width: 200,
                   height: 50,
                 ),
-                SizedBox(height: 10),
                 Text(
                   'Lunes a Viernes',
                   textAlign: TextAlign.center,
@@ -110,6 +117,11 @@ class InitialScreen extends StatelessWidget {
               ],
             ),
           ),
+
+          // Espacio flexible
+          Spacer(),
+
+          // Fondo e imagen del botón
           GestureDetector(
             onTap: () {
               Navigator.push(
